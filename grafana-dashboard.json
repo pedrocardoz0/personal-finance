@@ -1,0 +1,1000 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "grafana",
+          "uid": "grafana"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "currencyBRL"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "A-series"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Personal Finance"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "name"
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "refId": "A"
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#339d25",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "currencyBRL"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SUM(Valor)"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Entradas"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 8,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "dataset": "finance",
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT SUM(Valor) FROM finance.FinancialTransactions WHERE Tipo=\"entrada\" LIMIT 50 ",
+            "refId": "Entradas",
+            "sql": {
+              "columns": [
+                {
+                  "name": "SUM",
+                  "parameters": [
+                    {
+                      "name": "Valor",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "name": "Tipo",
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            },
+            "table": "FinancialTransactions"
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "currencyBRL"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SUM(Valor)"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Saidas"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 13,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "dataset": "finance",
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT SUM(Valor) FROM finance.FinancialTransactions WHERE Tipo=\"saida\" LIMIT 50 ",
+            "refId": "Saidas",
+            "sql": {
+              "columns": [
+                {
+                  "name": "SUM",
+                  "parameters": [
+                    {
+                      "name": "Valor",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "name": "Tipo",
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            },
+            "table": "FinancialTransactions"
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "currencyBRL"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SUM(Valor)"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Saidas"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "dataset": "finance",
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT\r\n  (SELECT SUM(Valor) FROM FinancialTransactions WHERE Tipo = 'Entrada') - (SELECT SUM(Valor) FROM FinancialTransactions WHERE Tipo = 'Saída') AS Saldo;\r\n",
+            "refId": "Saidas",
+            "sql": {
+              "columns": [
+                {
+                  "name": "SUM",
+                  "parameters": [
+                    {
+                      "name": "Valor",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "name": "Tipo",
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            },
+            "table": "FinancialTransactions"
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "scheme",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "smooth",
+              "lineWidth": 3,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyBRL"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 3
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "dataset": "finance",
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT Data, SUM(Valor) AS SomaSaidas\r\nFROM FinancialTransactions\r\nWHERE Tipo = 'Saída'\r\nGROUP BY Data\r\nORDER BY Data;\r\n",
+            "refId": "Saidas",
+            "sql": {
+              "columns": [
+                {
+                  "alias": "\"Valor\"",
+                  "parameters": [
+                    {
+                      "name": "Valor",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "alias": "\"Descricao\"",
+                  "parameters": [
+                    {
+                      "name": "Descricao",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "Data",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [],
+              "limit": 50,
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "9888b9bb-0123-4456-b89a-b18ade512abe",
+                    "properties": {
+                      "field": "Tipo",
+                      "operator": "equal",
+                      "value": [
+                        "saida"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "99a8aa9b-89ab-4cde-b012-318ade4d7748",
+                "type": "group"
+              },
+              "whereString": "Tipo = 'saida'"
+            },
+            "table": "FinancialTransactions"
+          }
+        ],
+        "title": "Saidas",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 27,
+          "w": 12,
+          "x": 12,
+          "y": 3
+        },
+        "id": 9,
+        "options": {
+          "basemap": {
+            "config": {},
+            "name": "Layer 0",
+            "type": "default"
+          },
+          "controls": {
+            "mouseWheelZoom": true,
+            "showAttribution": true,
+            "showDebug": false,
+            "showMeasure": false,
+            "showScale": false,
+            "showZoom": true
+          },
+          "layers": [
+            {
+              "config": {
+                "showLegend": true,
+                "style": {
+                  "color": {
+                    "fixed": "dark-green"
+                  },
+                  "opacity": 0.4,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 5,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/circle.svg",
+                    "mode": "fixed"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "middle"
+                  }
+                }
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "Layer 1",
+              "tooltip": true,
+              "type": "markers"
+            }
+          ],
+          "tooltip": {
+            "mode": "details"
+          },
+          "view": {
+            "allLayers": true,
+            "id": "coords",
+            "lat": -22.220337,
+            "lon": -49.954652,
+            "zoom": 15.35
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT\r\n  Latitude AS \"latitude\",\r\n  Longitude AS \"longitude\",\r\n  SUM(Valor) AS \"value\",\r\n  Tipo,\r\n  'Transaction' AS \"type\",\r\n  'Marília, Brazil' AS \"location\"\r\nFROM FinancialTransactions\r\nWHERE Tipo = 'Saída' OR Tipo = 'Entrada'\r\nGROUP BY Latitude, Longitude, Tipo;\r\n",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "type": "geomap"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "scheme",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "smooth",
+              "lineWidth": 3,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyBRL"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 11
+        },
+        "id": 10,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "dataset": "finance",
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT Data, SUM(Valor) AS SomaEntrada\r\nFROM FinancialTransactions\r\nWHERE Tipo = 'Entrada'\r\nGROUP BY Data\r\nORDER BY Data;\r\n",
+            "refId": "Entrada",
+            "sql": {
+              "columns": [
+                {
+                  "alias": "\"Valor\"",
+                  "parameters": [
+                    {
+                      "name": "Valor",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "alias": "\"Descricao\"",
+                  "parameters": [
+                    {
+                      "name": "Descricao",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "Data",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [],
+              "limit": 50,
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "9888b9bb-0123-4456-b89a-b18ade512abe",
+                    "properties": {
+                      "field": "Tipo",
+                      "operator": "equal",
+                      "value": [
+                        "saida"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "99a8aa9b-89ab-4cde-b012-318ade4d7748",
+                "type": "group"
+              },
+              "whereString": "Tipo = 'saida'"
+            },
+            "table": "FinancialTransactions"
+          }
+        ],
+        "title": "Entradas",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mysql",
+          "uid": "vyvVB1ZSk"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "left",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "string"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 12,
+          "x": 0,
+          "y": 19
+        },
+        "id": 7,
+        "options": {
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": [],
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "9.4.7",
+        "targets": [
+          {
+            "dataset": "finance",
+            "datasource": {
+              "type": "mysql",
+              "uid": "vyvVB1ZSk"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT * FROM FinancialTransactions;",
+            "refId": "Saidas",
+            "sql": {
+              "columns": [
+                {
+                  "alias": "\"Valor\"",
+                  "parameters": [
+                    {
+                      "name": "Valor",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "alias": "\"Descricao\"",
+                  "parameters": [
+                    {
+                      "name": "Descricao",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "Data",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [],
+              "limit": 50,
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "9888b9bb-0123-4456-b89a-b18ade512abe",
+                    "properties": {
+                      "field": "Tipo",
+                      "operator": "equal",
+                      "value": [
+                        "saida"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "99a8aa9b-89ab-4cde-b012-318ade4d7748",
+                "type": "group"
+              },
+              "whereString": "Tipo = 'saida'"
+            },
+            "table": "FinancialTransactions"
+          }
+        ],
+        "type": "table"
+      }
+    ],
+    "refresh": false,
+    "revision": 1,
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-30d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Finace",
+    "uid": "Vxp8l1ZSk",
+    "version": 20,
+    "weekStart": ""
+  }
